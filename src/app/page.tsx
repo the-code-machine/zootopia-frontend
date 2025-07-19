@@ -1,7 +1,14 @@
-import Image from "next/image";
-
 export default function Home() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20"></div>
+    <div className="flex justify-center items-center h-screen">
+      <a
+        href="https://dribbble.com/shots/24573624-Point-of-Sales-System-Landing-Page"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-blue-600 underline text-lg"
+      >
+        Visit Zootopia Website
+      </a>
+    </div>
   );
 }
