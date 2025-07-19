@@ -2,10 +2,12 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface AuthState {
   email: string;
+  otp: string;
 }
 
 const initialState: AuthState = {
   email: "",
+  otp: "",
 };
 
 export const authSlice = createSlice({
@@ -18,8 +20,14 @@ export const authSlice = createSlice({
     clearEmail(state) {
       state.email = "";
     },
+    setOtp(state, action: PayloadAction<string>) {
+      state.otp = action.payload;
+    },
+    clearOtp(state) {
+      state.otp = "";
+    },
   },
 });
 
-export const { setEmail, clearEmail } = authSlice.actions;
+export const { setEmail, clearEmail, setOtp, clearOtp } = authSlice.actions;
 export default authSlice.reducer;
