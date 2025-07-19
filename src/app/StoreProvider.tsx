@@ -15,7 +15,10 @@ export default function StoreProvider({
     storeRef.current = makeStore();
   }
 
-  return <Provider store={storeRef.current}>
-    <Toaster/>
-    {children}</Provider>;
+  return (
+    <Provider store={storeRef.current}>
+      <Toaster />
+      {children}
+    </Provider>
+  );
 }

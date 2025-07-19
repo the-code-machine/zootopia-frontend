@@ -10,33 +10,16 @@
 
   --secondary: #e8f9fb;
   --secondary-foreground: #0d3d45;
-}
 
-@theme inline {
+  /* Tailwind inline theme variables */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
-
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
-
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-
-    --primary: #62c5d4;
-    --primary-foreground: #ffffff;
-
-    --secondary: #164e5c;
-    --secondary-foreground: #e5f9fd;
-  }
 }
 
 body {
@@ -44,3 +27,5 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* 🚫 Removed dark mode media query to avoid override */

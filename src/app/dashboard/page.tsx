@@ -1,7 +1,6 @@
-import React from 'react'
+import Navigation from "@/components/sidebar/Sidebar";
+import React from "react";
 
 export default function page() {
-  return (
-    <div>page</div>
-  )
+  return <div></div>;
 }
