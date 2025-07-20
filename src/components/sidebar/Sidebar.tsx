@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { Home, Calendar, FileText, User, Heart } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 interface NavItem {
   id: string;
@@ -10,10 +11,10 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-  { id: "home", label: "Home", icon: Home, href: "/" },
-  { id: "booking", label: "Booking", icon: Calendar, href: "/booking" },
-  { id: "blog", label: "Blog", icon: FileText, href: "/blog" },
-  { id: "my", label: "My", icon: User, href: "/my" },
+  { id: "home", label: "Home", icon: Home, href: "/dashboard" },
+  { id: "booking", label: "Booking", icon: Calendar, href: "/dashboard/booking" },
+  { id: "blog", label: "Blog", icon: FileText, href: "/dashboard/blog" },
+  { id: "my", label: "My", icon: User, href: "/dashboard/my" },
 ];
 
 interface NavigationProps {
@@ -22,14 +23,17 @@ interface NavigationProps {
 }
 
 export default function Navigation({
-  activeItem = "home",
+  activeItem = "home", 
   onItemClick,
 }: NavigationProps) {
   const [currentActive, setCurrentActive] = useState(activeItem);
 
+  const router = useRouter();
+
   const handleItemClick = (item: NavItem) => {
     setCurrentActive(item.id);
     onItemClick?.(item);
+    router.push(item.href);
   };
 
   return (

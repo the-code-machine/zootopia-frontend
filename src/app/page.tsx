@@ -7,7 +7,7 @@ export default function Home() {
         rel="noopener noreferrer"
         className="text-blue-600 underline text-lg"
       >
-        sarthak Bhoot hai
+       
       </a>
     </div>
   );
