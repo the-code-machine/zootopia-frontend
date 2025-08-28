@@ -1,0 +1,20 @@
+{
+  "/favicon.ico/route": "/favicon.ico",
+  "/_not-found/page": "/_not-found",
+  "/login/page": "/login",
+  "/page": "/",
+  "/dashboard/[...page]/page": "/dashboard/[...page]",
+  "/dashboard/booking/appointments/page": "/dashboard/booking/appointments",
+  "/dashboard/booking/appointments/[id]/page": "/dashboard/booking/appointments/[id]",
+  "/dashboard/booking/medical-history/[id]/page": "/dashboard/booking/medical-history/[id]",
+  "/dashboard/booking/medical-history/page": "/dashboard/booking/medical-history",
+  "/dashboard/booking/page": "/dashboard/booking",
+  "/dashboard/booking/vaccine-details/[id]/page": "/dashboard/booking/vaccine-details/[id]",
+  "/dashboard/booking/vaccine-details/page": "/dashboard/booking/vaccine-details",
+  "/dashboard/me/page": "/dashboard/me",
+  "/dashboard/medical-record/page": "/dashboard/medical-record",
+  "/dashboard/new-appointment/page": "/dashboard/new-appointment",
+  "/dashboard/page": "/dashboard",
+  "/dashboard/pet-registration/page": "/dashboard/pet-registration",
+  "/dashboard/vaccine-registration/page": "/dashboard/vaccine-registration"
+}

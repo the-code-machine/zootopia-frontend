@@ -1,0 +1,20 @@
+{
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/login/page": "app/login/page.js",
+  "/page": "app/page.js",
+  "/dashboard/[...page]/page": "app/dashboard/[...page]/page.js",
+  "/dashboard/booking/appointments/page": "app/dashboard/booking/appointments/page.js",
+  "/dashboard/booking/appointments/[id]/page": "app/dashboard/booking/appointments/[id]/page.js",
+  "/dashboard/booking/medical-history/[id]/page": "app/dashboard/booking/medical-history/[id]/page.js",
+  "/dashboard/booking/medical-history/page": "app/dashboard/booking/medical-history/page.js",
+  "/dashboard/booking/page": "app/dashboard/booking/page.js",
+  "/dashboard/booking/vaccine-details/[id]/page": "app/dashboard/booking/vaccine-details/[id]/page.js",
+  "/dashboard/booking/vaccine-details/page": "app/dashboard/booking/vaccine-details/page.js",
+  "/dashboard/me/page": "app/dashboard/me/page.js",
+  "/dashboard/medical-record/page": "app/dashboard/medical-record/page.js",
+  "/dashboard/new-appointment/page": "app/dashboard/new-appointment/page.js",
+  "/dashboard/page": "app/dashboard/page.js",
+  "/dashboard/pet-registration/page": "app/dashboard/pet-registration/page.js",
+  "/dashboard/vaccine-registration/page": "app/dashboard/vaccine-registration/page.js"
+}
