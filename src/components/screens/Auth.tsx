@@ -1,193 +1,201 @@
-'use client';
-import { backend_url } from '@/config';
-import React, { useState } from 'react';
-import Cookie  from 'js-cookie' 
-import axios from 'axios';
-import toast from 'react-hot-toast';
-import { useRouter } from 'next/navigation';
+"use client";
+import { backend_url } from "@/config";
+import React, { useState } from "react";
+import Cookies from "js-cookie";
+import axios from "axios";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 interface LoginState {
   email: string;
   otp: string;
-  step: 'email' | 'otp';
+  step: "email" | "otp";
   isLoading: boolean;
 }
 
 const LoginComponent: React.FC = () => {
   const router = useRouter();
   const [state, setState] = useState<LoginState>({
-    email: '',
-    otp: '',
-    step: 'email',
-    isLoading: false
+    email: "",
+    otp: "",
+    step: "email",
+    isLoading: false,
   });
 
   const handleEmailSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!state.email) return;
 
-    setState(prev => ({ ...prev, isLoading: true }));
-    const url = `${backend_url}/auth/send-otp`;
-    const res = await axios.post(url, { email: state.email });
-    if(res.data){
-      setTimeout(() => {
-      setState(prev => ({
-        ...prev,
-        step: 'otp',
-        isLoading: false
-      }));
-    }, 1000);
+    setState((prev) => ({ ...prev, isLoading: true }));
+    try {
+      const url = `${backend_url}/auth/send-otp`;
+      const res = await axios.post(url, { email: state.email });
+      if (res.data) {
+        setState((prev) => ({ ...prev, step: "otp", isLoading: false }));
+      }
+    } catch (error) {
+      console.error("Failed to send OTP", error);
+      toast.error("Failed to send verification code.");
+      setState((prev) => ({ ...prev, isLoading: false }));
     }
-    // Simulate API call
   };
 
   const handleOtpSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!state.otp) return;
 
-    setState(prev => ({ ...prev, isLoading: true }));
-
-    const url = `${backend_url}/auth/verify-otp`;
-    const res = await axios.post(url, { email: state.email, otp: state.otp });
-    if (res.data) {
-      Cookie.set('auth_token', res.data.token);
-      Cookie.set('refresh_token', res.data.refresh);
+    setState((prev) => ({ ...prev, isLoading: true }));
+    try {
+      // Uncomment the following lines to enable API call
+      const url = `${backend_url}/auth/verify-otp`;
+      const res = await axios.post(url, { email: state.email, otp: state.otp });
+      if (res.data) {
+        Cookies.set("auth_token", res.data.token);
+        Cookies.set("refresh_token", res.data.refresh);
+        toast.success("Login successful!");
+        router.push("/dashboard");
+      }
+    } catch (error) {
+      console.error("Failed to verify OTP", error);
+      toast.error("Invalid verification code. Please try again.");
+      setState((prev) => ({ ...prev, isLoading: false, otp: "" }));
     }
-    // Simulate OTP verification
-    setTimeout(() => {
-      setState(prev => ({ ...prev, isLoading: false }));
-      toast.success('Login successful!');
-      router.push('/dashboard');
-    }, 1000);
   };
 
   const handleBack = () => {
-    setState(prev => ({
+    setState((prev) => ({
       ...prev,
-      step: 'email',
-      otp: ''
+      step: "email",
+      otp: "",
     }));
   };
 
   return (
-    <>
-      <div className="h-screen flex overflow-hidden">
-        {/* Left Panel - Login Form */}
-        <div className="flex-1 flex items-center justify-center  bg-white px-8 md:px-0">
-          <div className="w-full relative z-10 max-w-xl space-y-8 shadow-lg rounded-lg  py-16 px-12 bg-white">
-            {/* Header */}
-            <div className="text-left">
-              <h1 className="text-3xl font-bold text-foreground mb-2">
-                Login
-              </h1>
-              <p className="text-gray-600 text-sm">
-                {state.step === 'email'
-                  ? 'Enter your email to continue'
-                  : 'Enter the OTP sent to your email'
-                }
+    <div className="flex min-h-screen items-center justify-center md:bg-[#F5F5F5] w-full">
+      <div className="w-full max-w-sm rounded-xl  p-8 bg-white ">
+        <h1 className="sm:text-xl text-2xl font-normal text-center text-gray-700">
+          Zootopia Animal Wellness Center
+        </h1>
+
+        {state.step === "email" && (
+          <>
+            <div className="mt-8">
+              <h2 className="text-[18px] font-bold">Sign in</h2>
+              <p className="mt-2 text-[13px] text-gray-600">
+                Enter your email and we'll send you a verification code
               </p>
             </div>
 
-            {/* Email Form */}
-            {state.step === 'email' && (
-              <div className="space-y-6">
-                <div className="space-y-2">
-                  <label
-                    htmlFor="email"
-                    className="block text-sm font-medium text-foreground"
-                  >
-                    Email Address
-                  </label> 
-                  <input
-                    id="email"
-                    type="email"
-                    required
-                    value={state.email}
-                    onChange={(e) => setState(prev => ({
-                      ...prev,
-                      email: e.target.value
-                    }))}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-colors text-foreground"
-                    placeholder="Enter your email"
-                    disabled={state.isLoading}
-                  />
-                </div>
-
-                <button
-                  type="button"
-                  onClick={handleEmailSubmit}
-                  disabled={state.isLoading || !state.email}
-                  className="w-full bg-primary text-primary-foreground py-3 px-4 rounded-lg font-medium hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-opacity"
-                >
-                  {state.isLoading ? 'Sending...' : 'Next'}
-                </button>
+            <form onSubmit={handleEmailSubmit} className="mt-3 space-y-5">
+              <div className="relative">
+                <input
+                  id="email"
+                  type="email"
+                  required
+                  value={state.email}
+                  onChange={(e) =>
+                    setState((prev) => ({ ...prev, email: e.target.value }))
+                  }
+                  className="peer w-full rounded-md border border-gray-300 px-2 py-2 text-sm text-gray-900 focus:border-blue-500 "
+                  placeholder="Email"
+                  disabled={state.isLoading}
+                />
+                {/* The placeholder acts as the label as in the image */}
               </div>
-            )}
 
-            {/* OTP Form */}
-            {state.step === 'otp' && (
-              <div className="space-y-6">
-                <div className="space-y-2">
-                  <label
-                    htmlFor="otp"
-                    className="block text-sm font-medium text-foreground"
-                  >
-                    Enter OTP
-                  </label>
-                  <input
-                    id="otp"
-                    type="text"
-                    required
-                    maxLength={6}
-                    value={state.otp}
-                    onChange={(e) => setState(prev => ({
-                      ...prev,
-                      otp: e.target.value.replace(/\D/g, '')
-                    }))}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-colors text-center text-2xl font-mono tracking-widest text-foreground"
-                    placeholder="000000"
-                    disabled={state.isLoading}
-                  />
-                  <p className="text-xs text-gray-500 text-center">
-                    OTP sent to {state.email}
-                  </p>
-                </div>
+              <button
+                type="submit"
+                disabled={state.isLoading || !state.email}
+                className="w-full rounded-md bg-[#005BD3] py-3 px-3 font-semibold text-white text-sm transition hover:bg-[#0045A3] focus:outline-none focus:ring-2  focus:ring-offset-2 disabled:cursor-not-allowed "
+              >
+                {state.isLoading ? "Sending..." : "Continue"}
+              </button>
+            </form>
 
-                <div className="space-y-3">
-                  <button
-                    type="button"
-                    onClick={handleOtpSubmit}
-                    disabled={state.isLoading || state.otp.length !== 6}
-                    className="w-full bg-primary text-primary-foreground py-3 px-4 rounded-lg font-medium hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-opacity"
-                  >
-                    {state.isLoading ? 'Verifying...' : 'Verify OTP'}
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={handleBack}
-                    className="w-full text-gray-600 py-2 px-4 rounded-lg font-medium hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-200 transition-colors"
-                  >
-                    Back to Email
-                  </button>
-                </div>
-              </div>
-            )}
-
-            {/* Footer */}
-            <div className="text-center text-sm text-gray-500">
-              <p>By continuing, you agree to our Terms of Service</p>
+            <div className="mt-6 flex justify-start gap-4 text-sm">
+              <a
+                href="https://www.zootopia.com.ph/89981845806/policies/40314372398.html?locale=en"
+                className="font-medium text-[#005BD3]  hover:underline"
+              >
+                Privacy policy
+              </a>
+              <a
+                href="https://www.zootopia.com.ph/89981845806/policies/42022076718.html?locale=en"
+                className="font-medium text-[#005BD3]  hover:underline"
+              >
+                Terms of service
+              </a>
             </div>
-          </div>
-          <img src="/login-bg.svg" alt="" className='absolute h-full z-0 top-0 left-0 md:w-1/2 w-full object-cover' />
-        </div>
+          </>
+        )}
 
-        {/* Right Panel - Image */}
-        <div className="hidden lg:flex flex-1 items-center justify-center">
-          <img src="/image.png" alt="" className=' w-full h-full' />
-        </div>
+        {state.step === "otp" && (
+          <>
+            <div className="mt-8">
+              <h2 className="text-xl font-bold">Enter code</h2>
+              <p className="mt-2 text-sm text-gray-600">
+                Sent to{" "}
+                <strong className="font-medium text-gray-800">
+                  {state.email}
+                </strong>
+                .
+              </p>
+            </div>
+
+            <form onSubmit={handleOtpSubmit} className="mt-3 space-y-4">
+              <div>
+                <input
+                  id="otp"
+                  type="text"
+                  required
+                  maxLength={6}
+                  value={state.otp}
+                  onChange={(e) =>
+                    setState((prev) => ({
+                      ...prev,
+                      otp: e.target.value.replace(/\D/g, ""),
+                    }))
+                  }
+                  className="w-full rounded-md border border-gray-300 px-2 py-2  text-md tracking-widest text-gray-900 focus:border-blue-500 focus:ring-blue-500"
+                  placeholder="6-digit code"
+                  disabled={state.isLoading}
+                />
+              </div>
+
+              <button
+                type="submit"
+                disabled={state.isLoading || state.otp.length !== 6}
+                className="w-full rounded-md bg-[#005BD3] py-3 px- font-semibold text-sm text-white transition hover:bg-[#0045A3] focus:outline-none focus:ring-2  focus:ring-offset-2 disabled:cursor-not-allowed "
+              >
+                {state.isLoading ? "Verifying..." : "Verify"}
+              </button>
+
+              <button
+                type="button"
+                onClick={handleBack}
+                className="w-full py-2  text-sm font-medium text-[#005BD3]  cursor-pointer hover:underline text-left"
+              >
+                Sign in with a different email
+              </button>
+            </form>
+            <div className="mt-1 flex justify-start gap-4 text-sm">
+              <a
+                href="https://www.zootopia.com.ph/89981845806/policies/40314372398.html?locale=en"
+                className="font-medium text-[#005BD3]  hover:underline"
+              >
+                Privacy policy
+              </a>
+              <a
+                href="https://www.zootopia.com.ph/89981845806/policies/42022076718.html?locale=en"
+                className="font-medium text-[#005BD3]  hover:underline"
+              >
+                Terms of service
+              </a>
+            </div>
+          </>
+        )}
       </div>
-    </>
+    </div>
   );
 };
 
