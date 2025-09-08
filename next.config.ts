@@ -4,7 +4,19 @@ const nextConfig: NextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  output: "export",
+  async headers() {
+    return [
+      {
+        source: "/(.*)", // apply to all routes
+        headers: [
+          {
+            key: "Content-Security-Policy",
+            value: "frame-ancestors *;", // allow all domains to embed
+          },
+        ],
+      },
+    ];
+  },
 };
 
 export default nextConfig;

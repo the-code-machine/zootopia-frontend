@@ -36,7 +36,10 @@ axiosClient.interceptors.response.use(
         });
 
         const newToken = res.data.token;
-        Cookies.set("auth_token", newToken);
+        Cookies.set("auth_token", res.data.token, {
+          sameSite: "None",
+          secure: true,
+        });
 
         originalRequest.headers["Authorization"] = `Bearer ${newToken}`;
         return axiosClient(originalRequest);

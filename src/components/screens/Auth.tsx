@@ -50,8 +50,15 @@ const LoginComponent: React.FC = () => {
       const url = `${backend_url}/auth/verify-otp`;
       const res = await axios.post(url, { email: state.email, otp: state.otp });
       if (res.data) {
-        Cookies.set("auth_token", res.data.token);
-        Cookies.set("refresh_token", res.data.refresh);
+        Cookies.set("auth_token", res.data.token, {
+          sameSite: "None",
+          secure: true,
+        });
+        Cookies.set("refresh_token", res.data.refresh, {
+          sameSite: "None",
+          secure: true,
+        });
+
         toast.success("Login successful!");
         router.push("/dashboard");
       }
