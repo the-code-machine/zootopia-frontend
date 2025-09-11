@@ -1,3 +1,4 @@
+"use client";
 import { useEffect, useRef } from "react";
 import Cookies from "js-cookie";
 import { useAppDispatch, useAppSelector } from "@/redux/lib/hooks";
