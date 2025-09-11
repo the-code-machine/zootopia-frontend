@@ -13,6 +13,8 @@ import { fetchAppointments } from "@/redux/features/appointmentSlice";
 import { usePathname } from "next/navigation";
 import axiosClient from "@/utils/axiosClient";
 import { setUserProfile } from "@/redux/features/userSlice";
+import { requestForToken } from "@/utils/firebase";
+import { backend_url } from "@/config";
 
 export default function StoreProvider({
   children,
@@ -42,6 +44,27 @@ export default function StoreProvider({
 }
 
 const FetchPets = () => {
+  const handleGetToken = async () => {
+    const fcmToken = await requestForToken();
+    if (fcmToken) {
+      // Send the token to your backend
+      try {
+        const response = await axiosClient.post(backend_url + "/fcm/save", {
+          fcmToken, // Key is 'fcmToken' as requested
+        });
+
+        if (!response.data) {
+          throw new Error("Failed to save FCM token.");
+        }
+
+        const data = await response.data;
+        console.log("Token saved successfully:", data);
+      } catch (error) {
+        console.error("Error saving FCM token:", error);
+      }
+    }
+  };
+
   const { pets } = useAppSelector((state) => state.pet);
   const { vaccines } = useAppSelector((state) => state.vaccine);
   const { records } = useAppSelector((state) => state.medical);
@@ -67,6 +90,7 @@ const FetchPets = () => {
       records.length <= 0 &&
       appointments.length <= 0
     ) {
+      handleGetToken();
       fetchUserProfile();
       dispatch(fetchPets());
       dispatch(fetchVaccines());
