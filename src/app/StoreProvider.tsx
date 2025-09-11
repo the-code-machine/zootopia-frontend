@@ -9,8 +9,42 @@ import { fetchPets } from "@/redux/features/petSlice";
 import { fetchVaccines } from "@/redux/features/vaccineslice";
 import { fetchMedicalRecords } from "@/redux/features/medicalSlice";
 import { fetchAppointments } from "@/redux/features/appointmentSlice";
+import { Provider } from "react-redux";
+import { Toaster } from "react-hot-toast";
+import { AppStore, makeStore } from "@/redux/lib/store";
+import { usePathname } from "next/navigation";
 // ... your other imports
+export default function StoreProvider({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const path = usePathname();
 
+  const storeRef = useRef<AppStore | null>(null);
+
+  if (!storeRef.current) {
+    // Create the store instance the first time this renders
+
+    storeRef.current = makeStore();
+  }
+
+  return (
+    <div
+      className={` ${
+        path.includes("login") ? " w-full" : "max-w-3xl mx-auto"
+      } `}
+    >
+      <Provider store={storeRef.current}>
+        <Toaster />
+
+        <FetchPets />
+
+        {children}
+      </Provider>
+    </div>
+  );
+}
 const FetchPets = () => {
   const dispatch = useAppDispatch();
   const { pets, vaccines, records, appointments } = useAppSelector((state) => ({
