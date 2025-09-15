@@ -1,2 +1,2 @@
 export const backend_url =
-  process.env.BACKEND_URL || "https://zootopia.webprvw.link/api";
+  process.env.BACKEND_URL || "https://api.zootopia.com.ph/api";
