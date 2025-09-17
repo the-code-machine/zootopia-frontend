@@ -78,7 +78,7 @@ const LoginComponent: React.FC = () => {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center md:bg-[#F5F5F5] w-full">
+    <div className="flex min-h-screen items-center justify-center bg-[#edebd7] w-full">
       <div className="w-full max-w-sm rounded-xl  p-8 bg-white ">
         <h1 className="sm:text-xl text-2xl font-normal text-center text-gray-700">
           Zootopia Animal Wellness Center
