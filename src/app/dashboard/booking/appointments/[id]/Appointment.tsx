@@ -110,7 +110,16 @@ export default function PetReservationDetails() {
         {/* Date and Edit Button */}
         <div className="mb-6 flex items-center justify-between rounded-lg border border-gray-300 bg-white p-3 text-gray-700">
           <span>
-            {appointment.date} {appointment.timeSlot} {appointment.time}
+            {appointment.date
+              ? (() => {
+                  const d = new Date(appointment.date);
+                  const month = String(d.getMonth() + 1).padStart(2, "0");
+                  const day = String(d.getDate()).padStart(2, "0");
+                  const year = d.getFullYear();
+                  return `${month}-${day}-${year}`;
+                })()
+              : "N/A"}
+            {appointment.timeSlot} {appointment.time}
           </span>
           <button className="rounded bg-gray-200 px-4 py-1 text-sm font-medium text-gray-700 hover:bg-gray-300">
             Edit

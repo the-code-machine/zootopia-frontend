@@ -189,28 +189,28 @@ const HomePage = (userData: any) => {
       id: "1",
       title: "New Appointment",
       icon: <Calendar size={24} />,
-      color: "bg-[#3CD3E1]/10 text-[#3CD3E1]",
+      color: "bg-[#A1534E]/10 text-[#A1534E]",
       route: "/dashboard/new-appointment",
     },
     {
       id: "2",
       title: "Add Medical Record",
       icon: <Stethoscope size={24} />,
-      color: "bg-[#3CD3E1]/10 text-[#3CD3E1]",
+      color: "bg-[#A1534E]/10 text-[#A1534E]",
       route: "/dashboard/medical-record",
     },
     {
       id: "3",
       title: "Add Vaccine Record",
       icon: <Shield size={24} />,
-      color: "bg-[#3CD3E1]/10 text-[#3CD3E1]",
+      color: "bg-[#A1534E]/10 text-[#A1534E]",
       route: "/dashboard/vaccine-registration",
     },
     {
       id: "4",
       title: "View Bookings",
       icon: <BookMinusIcon size={24} />,
-      color: "bg-[#3CD3E1]/10 text-[#3CD3E1]",
+      color: "bg-[#A1534E]/10 text-[#A1534E]",
       route: "/dashboard/booking",
     },
   ];
@@ -249,7 +249,7 @@ const HomePage = (userData: any) => {
                 onClick={() => setSelectedPetId(pet.id)}
                 className={`flex-shrink-0 w-64 p-4 rounded-xl cursor-pointer transition-all ${
                   selectedPetId === pet.id
-                    ? "bg-[#3CD3E1]/10 border-2 border-[#3CD3E1] shadow-sm"
+                    ? "bg-[#A1534E]/10 border-2 border-[#A1534E] shadow-sm"
                     : "bg-gray-50 border border-gray-200"
                 }`}
               >
@@ -259,7 +259,7 @@ const HomePage = (userData: any) => {
                     alt={pet.name}
                     className={`w-14 h-14 rounded-full object-cover  ${
                       selectedPetId === pet.id
-                        ? "border-[#3CD3E1]"
+                        ? "border-[#A1534E]"
                         : "border-gray-300"
                     }`}
                   />
@@ -279,7 +279,7 @@ const HomePage = (userData: any) => {
               href={"/dashboard/pet-registration"}
               className="flex-shrink-0 w-64 h-auto p-4 bg-gray-50 border-2 border-dashed border-gray-300 rounded-xl cursor-pointer flex flex-col items-center justify-center"
             >
-              <Plus size={24} className="text-[#3CD3E1] mb-2" />
+              <Plus size={24} className="text-[#A1534E] mb-2" />
               <span className="text-xs text-gray-500 text-center">Add Pet</span>
             </Link>
           </div>

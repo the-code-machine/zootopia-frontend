@@ -150,10 +150,18 @@ const BookingHistoryPage = () => {
                   <div className="border-t-4 border-[#545BDE] p-4">
                     <div className="flex items-center justify-between mb-3">
                       <div className="text-xl font-medium">
-                        {new Date(record.date)
-                          .toISOString()
-                          .split("T")[0]
-                          .replace(/-/g, ".")}
+                        {record.date
+                          ? (() => {
+                              const d = new Date(record.date);
+                              const month = String(d.getMonth() + 1).padStart(
+                                2,
+                                "0"
+                              );
+                              const day = String(d.getDate()).padStart(2, "0");
+                              const year = d.getFullYear();
+                              return `${month}-${day}-${year}`;
+                            })()
+                          : "N/A"}
                       </div>
                     </div>
                     <div className="flex items-center mb-4">
@@ -293,20 +301,36 @@ const BookingHistoryPage = () => {
                       <div className="text-gray-400">Vaccination date</div>
                       <div>
                         {" "}
-                        {new Date(record.vaccinationDate)
-                          .toISOString()
-                          .split("T")[0]
-                          .replace(/-/g, ".")}
+                        {record.vaccinationDate
+                          ? (() => {
+                              const d = new Date(record.vaccinationDate);
+                              const month = String(d.getMonth() + 1).padStart(
+                                2,
+                                "0"
+                              );
+                              const day = String(d.getDate()).padStart(2, "0");
+                              const year = d.getFullYear();
+                              return `${month}-${day}-${year}`;
+                            })()
+                          : "N/A"}
                       </div>
                       <div className="text-gray-400">Expiration period</div>
                       <div>
-                        {new Date(record.dueDate)
-                          .toISOString()
-                          .split("T")[0]
-                          .replace(/-/g, ".") || "N/A"}
+                        {record.dueDate
+                          ? (() => {
+                              const d = new Date(record.dueDate);
+                              const month = String(d.getMonth() + 1).padStart(
+                                2,
+                                "0"
+                              );
+                              const day = String(d.getDate()).padStart(2, "0");
+                              const year = d.getFullYear();
+                              return `${month}-${day}-${year}`;
+                            })()
+                          : "N/A"}
                       </div>
                       <div className="text-gray-400">Vaccination cycle</div>
-                      <div>2 weeks apart</div>
+                      <div>1 year apart</div>
                     </div>
                     <div className="mt-3 w-full">
                       <button
@@ -452,10 +476,16 @@ const BookingHistoryPage = () => {
                   <div className="flex items-center justify-between mb-3">
                     <div className="text-xl font-medium flex justify-between w-full">
                       <span>
-                        {new Date(appointment.date)
-                          .toISOString()
-                          .split("T")[0]
-                          .replace(/-/g, ".")}
+                        {(() => {
+                          const d = new Date(appointment.date);
+                          const month = String(d.getMonth() + 1).padStart(
+                            2,
+                            "0"
+                          ); // months are 0-based
+                          const day = String(d.getDate()).padStart(2, "0");
+                          const year = d.getFullYear();
+                          return `${month}-${day}-${year}`;
+                        })()}
                       </span>
                       <span>
                         {" "}
@@ -474,11 +504,13 @@ const BookingHistoryPage = () => {
                         key={index}
                         className="flex items-center space-x-3 py-2 border-b border-gray-100"
                       >
-                        <img
-                          src={matchedPet?.image || ""}
-                          alt={matchedPet?.name}
-                          className="h-10 w-10 rounded-full object-cover"
-                        />
+                        {matchedPet?.image && (
+                          <img
+                            src={matchedPet?.image || ""}
+                            alt={matchedPet?.name}
+                            className="h-10 w-10 rounded-full object-cover"
+                          />
+                        )}
                         <div>
                           <div className="font-medium">
                             {matchedPet?.name ||
