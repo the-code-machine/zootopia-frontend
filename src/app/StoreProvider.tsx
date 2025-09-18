@@ -83,16 +83,10 @@ const FetchPets = () => {
     }
   }, []); // Empty dependency array ensures this runs only once on mount
 
-  // Effect for fetching application data
   useEffect(() => {
     const auth = Cookies.get("auth_token");
-    const isDataMissing =
-      pets.length <= 0 &&
-      vaccines.length <= 0 &&
-      records.length <= 0 &&
-      appointments.length <= 0;
 
-    if (auth && isDataMissing) {
+    if (auth) {
       const fetchUserProfile = async () => {
         try {
           const response = await axiosClient.get("/auth/profile");
@@ -102,14 +96,13 @@ const FetchPets = () => {
         }
       };
 
-      console.log("Fetching application data...");
       fetchUserProfile();
       dispatch(fetchPets());
       dispatch(fetchVaccines());
       dispatch(fetchMedicalRecords());
       dispatch(fetchAppointments());
     }
-  }, [dispatch, pets, vaccines, records, appointments]); // This effect depends on the data
+  }, [dispatch]); // only depends on dispatch
 
   return null; // This component doesn't need to render anything
 };
