@@ -104,14 +104,16 @@ const VaccineRegistration: React.FC = () => {
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, "0");
     const day = String(date.getDate()).padStart(2, "0");
-    return `${date}-${day}-${year}`;
+    return `${month}-${day}-${year}`;
   };
 
   const formatDisplayDate = (date: Date) => {
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, "0");
     const day = String(date.getDate()).padStart(2, "0");
-    return `${month}.${date}.${year}`;
+    // Before (Incorrect): return `${month}.${date}.${year}`;
+    // After (Correct):
+    return `${day}/${month}/${year}`;
   };
 
   const handleDateSelect = (date: Date) => {
