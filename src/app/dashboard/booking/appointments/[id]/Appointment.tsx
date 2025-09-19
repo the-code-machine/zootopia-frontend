@@ -64,7 +64,7 @@ export default function PetReservationDetails() {
   if (loading && !appointment) {
     return (
       <div className="flex h-screen items-center justify-center">
-        <Loader2 className="h-8 w-8 animate-spin text-cyan-500" />
+        <Loader2 className="h-8 w-8 animate-spin text-[#A1534E]/300" />
       </div>
     );
   }
@@ -118,8 +118,8 @@ export default function PetReservationDetails() {
                   const year = d.getFullYear();
                   return `${month}-${day}-${year}`;
                 })()
-              : "N/A"}
-            {appointment.timeSlot} {appointment.time}
+              : "N/A"}{" "}
+            | {appointment.time} | {appointment.timeSlot}
           </span>
           <button className="rounded bg-gray-200 px-4 py-1 text-sm font-medium text-gray-700 hover:bg-gray-300">
             Edit

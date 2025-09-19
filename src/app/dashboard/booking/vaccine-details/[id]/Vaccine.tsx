@@ -77,7 +77,7 @@ const VaccineDetails: React.FC = () => {
   if (vaccinesLoading) {
     return (
       <div className="flex h-screen items-center justify-center">
-        <Loader2 className="h-8 w-8 animate-spin text-cyan-500" />
+        <Loader2 className="h-8 w-8 animate-spin text-[#A1534E]/300" />
       </div>
     );
   }
@@ -115,7 +115,7 @@ const VaccineDetails: React.FC = () => {
             Whose record is this?
           </h3>
           <div className="flex space-x-3 overflow-x-auto pb-2">
-            <div className="flex shrink-0 items-center p-3 rounded-xl border-2 border-cyan-400 bg-cyan-50 w-52">
+            <div className="flex shrink-0 items-center p-3 rounded-xl border-2 border-[#A1534E] bg-[#A1534E]/30 w-52">
               <img
                 src={
                   selectedPet?.image ||

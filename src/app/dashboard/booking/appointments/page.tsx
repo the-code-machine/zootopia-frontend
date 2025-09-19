@@ -22,12 +22,16 @@ const ReservationCard = ({
   return (
     <div className="mb-8">
       <div className="mb-2 rounded-lg border border-gray-300 bg-white p-3 text-gray-700">
-        {new Date(reservation.date).toLocaleDateString("en-IN", {
-          year: "numeric",
-          month: "long",
-          day: "numeric",
-        })}{" "}
-        {reservation.timeSlot} {reservation.time}
+        {reservation.date
+          ? (() => {
+              const d = new Date(reservation.date);
+              const month = String(d.getMonth() + 1).padStart(2, "0");
+              const day = String(d.getDate()).padStart(2, "0");
+              const year = d.getFullYear();
+              return `${month}-${day}-${year}`;
+            })()
+          : "N/A"}{" "}
+        | {reservation.time} | {reservation.timeSlot}
       </div>
       <div className="mt-3">
         <div className="flex items-center justify-between py-2 mb-4">
@@ -91,14 +95,14 @@ export default function PetReservation() {
         </Link>
       </div>
 
-      <main className="p-4 mt-20">
+      <main className="p-4 pt-20">
         <h2 className="mb-8 text-2xl font-bold text-gray-900">
           Pet Reservation information
         </h2>
 
         {loading && (
           <div className="flex justify-center items-center py-10 min-h-[50vh]">
-            <Loader2 className="h-8 w-8 animate-spin text-cyan-500" />
+            <Loader2 className="h-8 w-8 animate-spin text-[#A1534E]/300" />
           </div>
         )}
 
@@ -125,7 +129,7 @@ export default function PetReservation() {
 
       <footer className="fixed md:max-w-3xl md:relative w-full bottom-0 bg-white p-4">
         <Link href="/dashboard/new-appointment">
-          <button className="w-full rounded-lg bg-cyan-400 py-3 text-lg font-semibold text-white shadow-md hover:bg-cyan-500 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-opacity-75">
+          <button className="w-full rounded-lg bg-[#A1534E] py-3 text-lg font-semibold text-white shadow-md hover:bg-[#A1534E]/300 focus:outline-none focus:ring-2 focus:ring-[#A1534E] focus:ring-opacity-75">
             New Appointment
           </button>
         </Link>

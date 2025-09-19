@@ -177,7 +177,7 @@ const UserProfileUpdatePage = () => {
                     className="h-full w-full object-cover"
                   />
                 ) : (
-                  <User className="h-24 w-24 text-[#46D3E0]" />
+                  <User className="h-24 w-24 text-[#A1534E]" />
                 )}
               </div>
               <button
@@ -337,7 +337,7 @@ const UserProfileUpdatePage = () => {
                 onClick={triggerFileInput}
                 className="w-full flex items-center justify-center space-x-2 py-3 px-4 border border-gray-200 rounded-lg"
               >
-                <Camera className="h-5 w-5 text-[#46D3E0]" />
+                <Camera className="h-5 w-5 text-[#A1534E]" />
                 <span>Upload from device</span>
               </button>
 
@@ -373,7 +373,7 @@ const UserProfileUpdatePage = () => {
             </div>
             <div className="text-center">
               <div className="mb-4 flex justify-center">
-                <div className="w-20 h-20 bg-[#46D3E0] bg-opacity-20 rounded-full flex items-center justify-center">
+                <div className="w-20 h-20 bg-[#A1534E] bg-opacity-20 rounded-full flex items-center justify-center">
                   <svg
                     className="h-10 w-10 text-[#ffff]"
                     fill="none"

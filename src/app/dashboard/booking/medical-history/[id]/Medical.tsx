@@ -130,7 +130,7 @@ const MedicalHistoryPage = () => {
         ) : (
           <button
             onClick={handleEditClick}
-            className="text-lg font-medium text-cyan-500"
+            className="text-lg font-medium text-[#A1534E]/300"
           >
             Edit
           </button>
@@ -274,7 +274,7 @@ const MedicalHistoryPage = () => {
           <button
             onClick={handleSaveClick}
             disabled={loading}
-            className="w-full bg-cyan-500 text-white font-semibold py-4 rounded-lg hover:bg-cyan-600 transition-colors disabled:bg-gray-400 flex items-center justify-center"
+            className="w-full bg-[#A1534E]/300 text-white font-semibold py-4 rounded-lg hover:bg-cyan-600 transition-colors disabled:bg-gray-400 flex items-center justify-center"
           >
             {loading ? <Loader2 className="w-6 h-6 animate-spin" /> : "Save"}
           </button>

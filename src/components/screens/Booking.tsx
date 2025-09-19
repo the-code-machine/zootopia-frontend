@@ -242,13 +242,13 @@ const BookingHistoryPage = () => {
 
         {/* Section divider with title */}
         <div className="flex items-center px-4 py-2 z-10">
-          <div className="flex-1 h-px bg-[#46D3E0]"></div>
+          <div className="flex-1 h-px bg-[#A1534E]"></div>
           <div className="px-4">
-            <button className="px-4 py-1 text-[#46D3E0] border border-[#46D3E0] bg-[#46D3E0]/15 rounded-md text-sm font-medium">
+            <button className="px-4 py-1 text-[#A1534E] border border-[#A1534E] bg-[#A1534E]/15 rounded-md text-sm font-medium">
               Vaccine
             </button>
           </div>
-          <div className="flex-1 h-px bg-[#46D3E0]"></div>
+          <div className="flex-1 h-px bg-[#A1534E]"></div>
         </div>
 
         {/* Vaccine Records */}
@@ -264,21 +264,29 @@ const BookingHistoryPage = () => {
                   key={record.id}
                   className="mb-8 bg-white rounded-lg shadow-md overflow-hidden"
                 >
-                  <div className="border-t-4 border-[#46D3E0] p-4">
+                  <div className="border-t-4 border-[#A1534E] p-4">
                     <div className="flex items-center justify-between mb-3">
                       <div className="flex items-center">
                         <span className="text-xl font-medium mr-2">
                           {record.vaccineName}
                         </span>
-                        <span className="px-3 py-1 bg-[#46D3E0] text-white text-xs rounded-full">
+                        <span className="px-3 py-1 bg-[#A1534E] text-white text-xs rounded-full">
                           {"Vaccine"}
                         </span>
                       </div>
                       <div className="text-base text-gray-400">
-                        {new Date(record.vaccinationDate)
-                          .toISOString()
-                          .split("T")[0]
-                          .replace(/-/g, ".")}
+                        {record.vaccinationDate
+                          ? (() => {
+                              const d = new Date(record.vaccinationDate);
+                              const month = String(d.getMonth() + 1).padStart(
+                                2,
+                                "0"
+                              );
+                              const day = String(d.getDate()).padStart(2, "0");
+                              const year = d.getFullYear();
+                              return `${month}-${day}-${year}`;
+                            })()
+                          : "N/A"}
                       </div>
                     </div>
                     <Link
@@ -324,7 +332,7 @@ const BookingHistoryPage = () => {
                                 "0"
                               );
                               const day = String(d.getDate()).padStart(2, "0");
-                              const year = d.getFullYear();
+                              const year = d.getFullYear() + 1;
                               return `${month}-${day}-${year}`;
                             })()
                           : "N/A"}
@@ -337,7 +345,7 @@ const BookingHistoryPage = () => {
                         onClick={() => toggleExpanded(record.id)}
                         className="w-full flex items-center justify-between  py-3 cursor-pointer"
                       >
-                        <div className="text-lg font-medium text-[#46D3E0] flex items-center">
+                        <div className="text-lg font-medium text-[#A1534E] flex items-center">
                           <svg
                             className="mr-3"
                             width="24"
@@ -348,11 +356,11 @@ const BookingHistoryPage = () => {
                           >
                             <path
                               d="M16.4897 19.8018C15.1683 20.5639 13.635 21 11.9999 21C7.02931 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12C21 13.6351 20.564 15.1684 19.8018 16.4899L19.7989 16.495C19.7255 16.6221 19.6885 16.6863 19.6718 16.7469C19.656 16.804 19.6506 16.8554 19.6547 16.9146C19.6589 16.9773 19.6806 17.0424 19.7235 17.171L19.7253 17.1758L20.4941 19.4823L20.4951 19.4853C20.6573 19.9719 20.7384 20.2152 20.6806 20.3774C20.6302 20.5187 20.5188 20.6303 20.3774 20.6807C20.2152 20.7386 19.9711 20.6572 19.4838 20.4947L19.4819 20.4939L17.1724 19.7241C17.0427 19.6808 16.9775 19.6591 16.9144 19.6548C16.8552 19.6507 16.8042 19.6561 16.7471 19.6719C16.6857 19.6888 16.6203 19.7265 16.4897 19.8018Z"
-                              fill="#46D3E0"
+                              fill="#A1534E"
                             />
                             <path
                               d="M12 15V12M12 12V9M12 12H15M12 12H9M11.9999 21C13.635 21 15.1683 20.5639 16.4897 19.8018C16.6203 19.7265 16.6857 19.6888 16.7471 19.6719C16.8042 19.6561 16.8552 19.6507 16.9144 19.6548C16.9775 19.6591 17.0427 19.6808 17.1724 19.7241L19.4819 20.4939L19.4838 20.4947C19.9711 20.6572 20.2152 20.7386 20.3774 20.6807C20.5188 20.6303 20.6302 20.5187 20.6806 20.3774C20.7384 20.2152 20.6573 19.9719 20.4951 19.4853L20.4941 19.4823L19.7253 17.1758L19.7235 17.171C19.6806 17.0424 19.6589 16.9773 19.6547 16.9146C19.6506 16.8554 19.656 16.804 19.6718 16.7469C19.6885 16.6863 19.7255 16.6221 19.7989 16.495L19.8018 16.4899C20.564 15.1684 21 13.6351 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02931 21 11.9999 21Z"
-                              stroke="#46D3E0"
+                              stroke="#A1534E"
                               strokeLinecap="round"
                               strokeLinejoin="round"
                             />

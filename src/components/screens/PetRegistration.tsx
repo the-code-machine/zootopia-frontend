@@ -464,7 +464,7 @@ const PetRegistrationPage: React.FC = () => {
                 onClick={triggerFileInput}
                 className="w-full flex items-center justify-center space-x-2 py-3 px-4 border border-gray-200 rounded-lg"
               >
-                <Camera className="h-5 w-5 text-[#46D3E0]" />
+                <Camera className="h-5 w-5 text-[#A1534E]" />
                 <span>Upload from device</span>
               </button>
 

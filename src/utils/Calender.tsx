@@ -123,12 +123,12 @@ const Calendar: React.FC<CalendarProps> = ({ onDateSelect }) => {
           onClick={goToPreviousMonth}
           className="disabled:opacity-30 disabled:cursor-not-allowed"
         >
-          <ChevronLeft className="text-[#46D3E0]" />
+          <ChevronLeft className="text-[#A1534E]" />
         </button>
         {/* --- MODIFICATION END --- */}
         <span className="font-medium text-lg">{formatMonthYear()}</span>
         <button onClick={goToNextMonth}>
-          <ChevronRight className="text-[#46D3E0]" />
+          <ChevronRight className="text-[#A1534E]" />
         </button>
       </div>
 
@@ -149,12 +149,12 @@ const Calendar: React.FC<CalendarProps> = ({ onDateSelect }) => {
               <button
                 onClick={() => handleDateSelect(day.day)}
                 className={`w-8 h-8 flex flex-col items-center justify-center rounded-full mx-auto 
-                  ${isSelected(day.day) && "bg-[#46D3E0]/15 text-[#46D3E0]"}
+                  ${isSelected(day.day) && "bg-[#A1534E]/15 text-[#A1534E]"}
                 `}
               >
                 {day.day}
                 {isToday(day.day) && (
-                  <div className="w-1 h-1 rounded-full bg-[#46D3E0] mx-auto " />
+                  <div className="w-1 h-1 rounded-full bg-[#A1534E] mx-auto " />
                 )}
               </button>
             ) : (

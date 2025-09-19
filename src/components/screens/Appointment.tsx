@@ -666,7 +666,7 @@ const AppointmentPage: React.FC = () => {
                   </label>
                   <button
                     onClick={() => openPetModal(index)}
-                    className={`w-full p-3 rect text-left focus:ring-2 flex justify-between focus:ring-cyan-500 focus:border-primary ${
+                    className={`w-full p-3 rect text-left focus:ring-2 flex justify-between focus:ring-[#A1534E]/300 focus:border-primary ${
                       form.selectedPet ? "text-[#3BB8AF] font-semibold" : ""
                     } ${
                       getErrorForField(index, "selection")

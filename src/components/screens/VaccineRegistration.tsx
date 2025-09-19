@@ -212,7 +212,7 @@ const VaccineRegistration: React.FC = () => {
                   onClick={() => setSelectedPet(pet)}
                   className={`flex shrink-0 items-center p-3 rounded-xl border-2 transition-colors w-52 ${
                     selectedPet?.id === pet?.id
-                      ? "border-cyan-400 bg-cyan-50"
+                      ? "border-[#A1534E] bg-[#A1534E]/30"
                       : "border-gray-200 bg-white"
                   }`}
                 >
